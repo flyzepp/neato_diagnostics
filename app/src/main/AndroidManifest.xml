@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sabev.neatologger" >
+
+    <uses-feature android:name="android.hardware.usb.host" android:required="true" />
+    <uses-sdk android:minSdkVersion="12" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".NeatoDiagnostic"
+            android:label="@string/title_activity_neato_diagnostic"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.sabev.neatologger.SHOW_ERROR" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
+        <service android:name=".LoggerService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.sabev.neatologger.ACTION_START_LOGGING"/>
+                <action android:name="com.sabev.neatologger.ACTION_STOP_LOGGING"/>
+                <action android:name="com.sabev.neatologger.ACTION_CHECK_IS_LOGGING"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
